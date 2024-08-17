@@ -60,6 +60,10 @@
 
 - feat/simple-test : simple test에서 놓친 분들을 위한 branch
 
+**playwright 테스트 마크업**
+
+- feat/playwright-markup: 전반적인 실습을 위한 마크업 브랜치
+
 **step 1 테스트**
 
 - feat/step1 : 반응형 웹 테스트 놓친 분들을 위한 테스트
