@@ -25,5 +25,8 @@ viewPortCases.forEach(({ width, height, viewportName }) => {
       await detailButton.click();
       await expect(description).toBeVisible();
     }
+
+    // step 2. 크로스 브라우징 테스트
+    await expect(page).toHaveScreenshot();
   });
 });
