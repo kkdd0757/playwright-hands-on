@@ -5,6 +5,10 @@ export const LoginPage = (): React.ReactElement => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('isLoggedIn') === 'true');
 
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
+  }, [localStorage.getItem('isLoggedIn')]);
+
   const handleLogin = () => {
     localStorage.setItem('isLoggedIn', 'true');
   };
