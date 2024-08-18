@@ -2,6 +2,7 @@ import { expect, test } from '@playwright/test';
 
 // step 1. 반응형 웹 테스트
 const viewPortCases = [
+  // step 2. 크로스 브라우징 테스트 : height 변경해서 스크린샷 찍어보기
   { width: 1280, height: 720, viewportName: 'Desktop' },
   { width: 375, height: 667, viewportName: 'Mobile' },
 ];
@@ -27,6 +28,8 @@ viewPortCases.forEach(({ width, height, viewportName }) => {
       await expect(detailButton).toBeVisible();
       await expect(detailButton).toHaveText('설명 보기');
       await expect(description).toBeHidden();
+      // step 2. 크로스 브라우징 테스트 : 버튼 클릭 이전 스크린샷 찍어보기
+      await expect(page).toHaveScreenshot();
       await detailButton.click();
       await expect(description).toBeVisible();
       await expect(detailButton).toHaveText('설명 가리기');
