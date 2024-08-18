@@ -48,7 +48,7 @@
 
 - screenshot이 브라우저별로 생성되는지 확인
 
-#### step 3. 인터렉션 테스트 (login)
+#### step 3. 인터랙션 테스트 (login)
 
 - product 페이지
   - 로그인 유저 : cart 페이지로 이동
