@@ -6,10 +6,12 @@
 .product-image {
   background: #a0e9f6;
   color: white;
-  text-align: center;
-  align-content: center;
   border-radius: 10px;
   font-size: 30px;
+  display: -webkit-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-card .price {
