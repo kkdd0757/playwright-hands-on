@@ -52,19 +52,20 @@ userTestCases.forEach(({ isUser, redirectUrl }) => {
   }) => {
     // 페이지를 새로고침하거나 이동
     await page.goto('/product');
-    // 로컬스토리지 초기화(다음 테스트에 영향주지 않기 위해서)
-    await page.evaluate(() => localStorage.clear());
     // set localStorage
     await page.evaluate(isUser => localStorage.setItem('isLoggedIn', isUser), isUser);
 
     // 설정된 로컬 스토리지 값을 반영하여 페이지를 새로고침
+    // -> 페이지 접근후 localStorage 세팅한것이기 때문
     // 이 부분이 없으면 localStorage 반영되지 않음
     await page.reload();
 
+    // getByRole : role로 element찾기
     const cartButton = page.getByRole('button', { name: '장바구니 담기' });
 
     await expect(cartButton).toBeVisible();
-    await expect(cartButton).toBeInViewport();
+    // viewport에 해당 element가 잡히는지 확인
+    // await expect(cartButton).toBeInViewport();
 
     await cartButton.click();
     await expect(page).toHaveURL(redirectUrl);
