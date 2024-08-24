@@ -7,7 +7,7 @@ export default defineConfig({
   // Run all tests in parallel.
   fullyParallel: true,
   // 리포트 파일(예: HTML 리포트, 테스트 실행 로그 등)을 저장할 디렉토리 지정
-  reporter: [['html', { outputFolder: 'test-results' }]],
+  reporter: [['html', { outputFolder: '__snapshots__' }]],
   use: {
     // 실패 시만 스크린샷 찍기 (필요시 변경 가능)
     screenshot: 'only-on-failure',
