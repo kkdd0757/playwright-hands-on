@@ -6,6 +6,14 @@
 - UI 차이를 시각적으로 확인할 수 있어, 변경 사항을 쉽게 파악 가능한 테스트입니다.
 - 자세한 설명은 (여기를)[https://playwright.dev/] 참조해주세요.
 
+## Playwright의 장점
+
+1. 수정 / 추가된 UI 가 바로 보인다
+- 따로 screenshot을 PR에 붙이지 않아도 되고, 리뷰어도 변경 사항이 바로 보여서 코드 리뷰하기도 편하다.
+- 코드 작성자 입장에서도 본인의 수정 사항을 바로 발견할 수 있다.
+2. 로컬에서 테스트하기 어려운 또는 귀찮은 케이스
+- UI가 다 찍혀서 local을 킬 수 없는 상황에서 좋다.
+
 ## 용어 설명
 
 - Viewport : 웹페이지가 화면에 보여지는 부분을 의미합니다. 뷰포트 크기(width, height)를 설정하여 데스크톱, 태블릿, 모바일 장치 등 다양한 화면 크기에서 웹 페이지가 어떻게 보이는지를 테스트할 수 있습니다.
@@ -22,9 +30,10 @@
 
 ## 실습하기 전 몸풀기
 
-- App.tsx > h1 요소에 'hello'라는 텍스트가 존재하는지 테스트
+- App.tsx > h1 element에 'hello'라는 텍스트가 존재하는지 테스트
 - screenshot이 브라우저별로 생성되는지 확인
 - hello라는 텍스트를 수정했을 때, 테스트가 fail 하는지 확인
+- screenshot update 확인
 
 ## 실습 시나리오 및 목표
 
@@ -36,6 +45,10 @@
 ### 시나리오
 
 #### step 1. 반응형 웹 테스트 (viewport)
+- Viewport에 따라 노출되는 UI가 달라진다.
+  - Detail Button TestId = ‘view-details-button’;
+  - Description TestId = ‘description’;
+  - isMobile : window.innerWidth <= 480px;
 
 - viewport 크기에 따라 버튼이 노출 여부 확인
   - MWeb :
@@ -48,11 +61,46 @@
 
 - screenshot이 브라우저별로 생성되는지 확인
 
+- Test 1)
+  - Mobile 설명 보기 클릭 이전에 screenshot 생성
+  - Mobile 설명 보기 클릭 이후에 screenshot 생성
+
+Test 2)
+  - Webkit에서만 이미지 영역 text가 상단에 붙어있음을 확인한다.
+
+- 참고 설정
+
+```
+playwright.config.ts
+  // 필요한 브라우저와 환경을 설정
+  projects: [
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+    {
+      name: 'Google Chrome',
+      use: { ...devices['Desktop Chrome'] },
+    },
+  ],
+
+```
+
 #### step 3. 인터랙션 테스트 (login)
 
-- product 페이지
-  - 로그인 유저 : cart 페이지로 이동
-  - 미로그인 유저 : login 페이지로 이동
+- 로그인 여부에 따라 redirect되는 url이 달라진다
+- 명세
+  - 로그인
+    - localstorage에 (isLoggedIn, ‘true’)를 set한다.
+    - Redirect : ‘/cart’ 로 이동한다.
+  - 미로그인
+    - localstorage를 clear한다. (초기화)
+    - page를 reload한다.
+    - Redirect : ‘/login’  으로 이동한다.
 
 ### 브랜치별 설명
 
