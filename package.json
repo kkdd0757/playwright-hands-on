@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview --port 3000",
     "test": "vite build && playwright test",
-    "test:update": "playwright test --update-snapshots"
+    "test:update": "playwright test --update-snapshots",
+    "setup": "npm install && npx playwright install"
   },
   "dependencies": {
     "react": "^18.3.1",
