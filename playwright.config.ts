@@ -7,7 +7,7 @@ export default defineConfig({
   // Run all tests in parallel.
   fullyParallel: true,
   // 리포트 파일(예: HTML 리포트, 테스트 실행 로그 등)을 저장할 디렉토리 지정
-  reporter: [['html', { outputFolder: '__snapshots__' }]],
+  reporter: [['html', { outputFolder: 'playwright' }]],
   use: {
     // 실패 시만 스크린샷 찍기 (필요시 변경 가능)
     screenshot: 'only-on-failure',
@@ -24,7 +24,7 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI, // CI 환경에서는 서버를 재사용하지 않음
   },
   // screenshot 저장할 위치
-  snapshotDir: 'screenshot',
+  snapshotDir: '__screenshot__',
   // 필요한 브라우저와 환경을 설정
   projects: [
     {
