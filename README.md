@@ -88,10 +88,10 @@ npm run setup
 - h1 element가 존재하는지 확인
 - 'hello'라는 텍스트가 존재하는지 확인
 
-```bash
-npm test    # 실패 (초기에는 없다가 생긴 테스트)
-npm test    # 성공 (기존 테스트와 비교)
-npm test:update   # 업데이트
+```typescript
+const headingElement = page.locator('h1');
+expect(headingElement).toBeVisible();
+expect(headingElement).toHaveText('hello');
 ```
 
 - **Screenshot 생성**
@@ -149,23 +149,25 @@ npm test:update
 
   - `Product.css` > `.product-image`에 아래를 수정
 
-  ```css
-  // as-is
-  .product-image {
-    /* ...어쩌고 */
-    text-align: center;
-    align-content: center;
-  }
+**AS-IS**
 
-  // to-be
-  .product-image {
-    /* ...어쩌고 */
-    display: -webkit-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  ```
+```css
+.product-image {
+  text-align: center;
+  align-content: center;
+}
+```
+
+**TO-BE**
+
+```css
+.product-image {
+  display: -webkit-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+```
 
 ### Step 3. 인터랙션 테스트
 
@@ -177,14 +179,14 @@ npm test:update
 
 - **로그인**
 
-  - `localStorage`에 `('isLoggedIn', 'true')`를 set한다.
-  - `page`를 reload한다.
-  - Redirect: `'/cart'`로 이동한다.
+- `localStorage`에 `('isLoggedIn', 'true')`를 set한다.
+- `page`를 reload한다.
+- Redirect: `'/cart'`로 이동한다.
 
 - **미로그인**
-  - `localStorage`에 `('isLoggedIn', 'true')` -> 생략 가능
-  - `page`를 reload한다.
-  - Redirect: `'/login'`으로 이동한다.
+- `localStorage`에 `('isLoggedIn', 'true')` -> 생략 가능
+- `page`를 reload한다.
+- Redirect: `'/login'`으로 이동한다.
 
 ## 🚧 Playwright 테스트의 현실적 한계
 
