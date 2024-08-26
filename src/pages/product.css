@@ -6,10 +6,11 @@
 .product-image {
   background: #a0e9f6;
   color: white;
-  text-align: center;
-  align-content: center;
   border-radius: 10px;
   font-size: 30px;
+  /* 여기를 수정해주세요. */
+  text-align: center;
+  align-content: center;
 }
 
 .product-card .price {
