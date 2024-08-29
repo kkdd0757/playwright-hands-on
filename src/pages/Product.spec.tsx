@@ -14,9 +14,9 @@ viewPortCases.forEach(({ width, height, viewportName }) => {
     await page.goto('/product');
 
     // 설명 보기 버튼
-    const detailButton = page.getByTestId('view-details-button');
+    const detailButton = page.locator('.view-details');
     // 설명 영역
-    const description = page.getByTestId('description');
+    const description = page.locator('.description');
 
     if (viewportName === 'Desktop') {
       // hidden과 not.toBeVisible 둘 다 테스트 가능.
