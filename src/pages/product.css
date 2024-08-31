@@ -8,9 +8,10 @@
   color: white;
   border-radius: 10px;
   font-size: 30px;
-  /* 여기를 수정해주세요. */
-  text-align: center;
-  align-content: center;
+  display: -webkit-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-card .price {
