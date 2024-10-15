@@ -39,3 +39,35 @@ viewPortCases.forEach(({ width, height, viewportName }) => {
     await expect(page).toHaveScreenshot();
   });
 });
+
+// step 3. 인터렉션 테스트
+const userTestCases = [
+  { isUser: 'false', redirectUrl: '/login' },
+  { isUser: 'true', redirectUrl: '/cart' },
+];
+
+userTestCases.forEach(({ isUser, redirectUrl }) => {
+  test(`Product Page 인터렉션 테스트: isUser: ${isUser}, redirectUrl: ${redirectUrl}`, async ({
+    page,
+  }) => {
+    // 페이지를 새로고침하거나 이동
+    await page.goto('/product');
+    // set localStorage
+    await page.evaluate(isUser => localStorage.setItem('isLoggedIn', isUser), isUser);
+
+    // 설정된 로컬 스토리지 값을 반영하여 페이지를 새로고침
+    // -> 페이지 접근후 localStorage 세팅한것이기 때문
+    // 이 부분이 없으면 localStorage 반영되지 않음
+    await page.reload();
+
+    // getByRole : role로 element찾기
+    const cartButton = page.getByRole('button', { name: '장바구니 담기' });
+
+    await expect(cartButton).toBeVisible();
+    // viewport에 해당 element가 잡히는지 확인
+    // await expect(cartButton).toBeInViewport();
+
+    await cartButton.click();
+    await expect(page).toHaveURL(redirectUrl);
+  });
+});
